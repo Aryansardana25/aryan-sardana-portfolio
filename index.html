@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Sardana — Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080b12;
+  --bg2: #0d1117;
+  --bg3: #111827;
+  --accent: #e8c547;
+  --accent2: #f0d96a;
+  --blue: #4f8ef7;
+  --text: #e8eaf0;
+  --muted: #6b7280;
+  --muted2: #9ca3af;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(232,197,71,0.2);
+  --card: rgba(255,255,255,0.03);
+  --glow: rgba(232,197,71,0.08);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+.cursor {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--accent); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transition: transform 0.1s; transform: translate(-50%,-50%);
+}
+.cursor-ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid rgba(232,197,71,0.4); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transition: transform 0.15s, width 0.2s, height 0.2s, opacity 0.2s;
+  transform: translate(-50%,-50%);
+}
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 6%;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,11,18,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: #fff; letter-spacing: 1px; }
+.nav-logo em { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--muted2); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: transparent; border: 1px solid var(--border2) !important; color: var(--accent) !important; padding: 8px 20px; border-radius: 2px; }
+.nav-cta:hover { background: var(--glow) !important; }
+.hero { min-height: 100vh; padding: 0 6%; display: flex; align-items: center; position: relative; overflow: hidden; }
+.hero-lines { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(232,197,71,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(232,197,71,0.03) 1px, transparent 1px); background-size: 80px 80px; }
+.hero-glow { position: absolute; top: 20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,197,71,0.06) 0%, transparent 70%); pointer-events: none; }
+.hero-glow2 { position: absolute; bottom: 10%; left: -5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(79,142,247,0.05) 0%, transparent 70%); pointer-events: none; }
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+.hero-eyebrow-line { width: 40px; height: 1px; background: var(--accent); }
+.hero-eyebrow span { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+.hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(60px, 10vw, 120px); font-weight: 300; line-height: 0.9; color: #fff; letter-spacing: -2px; margin-bottom: 8px; }
+.hero-name .italic { font-style: italic; color: var(--accent); }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 32px); font-weight: 300; color: var(--muted2); letter-spacing: 2px; margin-bottom: 32px; }
+.hero-desc { max-width: 520px; color: var(--muted2); font-size: 15px; font-weight: 300; line-height: 1.9; margin-bottom: 48px; border-left: 1px solid var(--border2); padding-left: 20px; }
+.hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.btn-gold { background: var(--accent); color: #080b12; text-decoration: none; padding: 14px 32px; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; display: inline-block; }
+.btn-gold:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-ghost { border: 1px solid var(--border); color: var(--muted2); text-decoration: none; padding: 14px 32px; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--border2); color: var(--accent); }
+.hero-stats { display: flex; gap: 48px; margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--border); }
+.stat-n { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 600; color: #fff; line-height: 1; }
+.stat-n span { color: var(--accent); }
+.stat-l { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
+.marquee-wrap { background: var(--accent); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-flex; animation: marquee 22s linear infinite; }
+.marquee-track span { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #080b12; padding: 0 28px; }
+.marquee-track .sep { color: rgba(8,11,18,0.35); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+section { padding: 100px 6%; position: relative; }
+.sec-label { font-size: 10px; font-weight: 600; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+.sec-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 300; color: #fff; line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 56px; }
+.sec-title em { font-style: italic; color: var(--accent); }
+.about-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+.about-left p { color: var(--muted2); font-size: 15px; line-height: 1.95; font-weight: 300; margin-bottom: 20px; }
+.about-left p strong { color: var(--text); font-weight: 500; }
+.about-philosophy { margin-top: 36px; padding: 24px; border: 1px solid var(--border2); border-radius: 2px; background: var(--glow); }
+.philosophy-label { font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.philosophy-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text); line-height: 1.5; font-weight: 300; }
+.skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.skill-box { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 20px; transition: border-color 0.2s; }
+.skill-box:hover { border-color: var(--border2); }
+.skill-box-title { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 2px; padding: 4px 10px; font-size: 11px; color: var(--muted2); font-weight: 400; }
+.exp-section { background: var(--bg2); }
+.exp-grid { display: grid; grid-template-columns: 200px 1fr; gap: 0; }
+.exp-sidebar { border-right: 1px solid var(--border); padding-right: 40px; }
+.exp-nav-item { padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+.exp-nav-company { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+.exp-nav-role { font-size: 12px; color: var(--muted); margin-top: 2px; transition: color 0.2s; }
+.exp-nav-item.active .exp-nav-company, .exp-nav-item:hover .exp-nav-company { color: var(--accent); }
+.exp-nav-item.active .exp-nav-role { color: var(--text); }
+.exp-content { padding-left: 60px; }
+.exp-panel { display: none; }
+.exp-panel.active { display: block; animation: fadeUp 0.4s ease; }
+@keyframes fadeUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+.exp-co { font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+.exp-role-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; color: #fff; line-height: 1.2; }
+.exp-date { display: inline-block; margin-top: 8px; font-size: 11px; color: var(--muted); letter-spacing: 1px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 4px 12px; border-radius: 2px; }
+.exp-bullets { list-style: none; margin: 20px 0; }
+.exp-bullets li { color: var(--muted2); font-size: 14px; font-weight: 300; line-height: 1.8; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid var(--border); }
+.exp-bullets li:last-child { border-bottom: none; }
+.exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 12px; top: 9px; }
+.exp-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; }
+.chip { background: rgba(232,197,71,0.06); border: 1px solid var(--border2); border-radius: 2px; padding: 4px 12px; font-size: 11px; color: var(--accent); letter-spacing: 0.5px; }
+.numbers-section { background: var(--accent); padding: 60px 6%; }
+.numbers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.number-item { text-align: center; padding: 20px; border-right: 1px solid rgba(8,11,18,0.15); }
+.number-item:last-child { border-right: none; }
+.number-big { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 600; color: #080b12; line-height: 1; }
+.number-desc { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: rgba(8,11,18,0.6); text-transform: uppercase; margin-top: 8px; }
+.projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
+.project-card { background: var(--bg); padding: 36px 32px; transition: background 0.3s; position: relative; overflow: hidden; }
+.project-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.project-card:hover { background: var(--bg3); }
+.project-card:hover::after { transform: scaleX(1); }
+.project-num { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: rgba(255,255,255,0.04); position: absolute; top: 16px; right: 20px; line-height: 1; }
+.project-icon { width: 44px; height: 44px; border-radius: 4px; background: var(--glow); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 20px; }
+.project-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #fff; margin-bottom: 4px; }
+.project-type { font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+.project-desc { color: var(--muted2); font-size: 13px; line-height: 1.85; font-weight: 300; margin-bottom: 20px; }
+.project-outcomes { background: rgba(255,255,255,0.02); border-radius: 2px; padding: 16px; margin-bottom: 16px; border-left: 2px solid var(--border2); }
+.outcome-title { font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.outcome-item { font-size: 12px; color: var(--text); padding: 3px 0; font-weight: 300; }
+.contact-section { background: var(--bg2); }
+.contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+.contact-inner .sec-label { justify-content: center; }
+.contact-inner .sec-label::before { display: none; }
+.contact-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,6vw,72px); font-weight: 300; color: #fff; line-height: 1; margin-bottom: 20px; }
+.contact-name em { font-style: italic; color: var(--accent); }
+.contact-sub { color: var(--muted2); font-size: 15px; font-weight: 300; line-height: 1.8; margin-bottom: 48px; }
+.contact-cards { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.contact-card { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 22px; color: var(--text); font-size: 13px; text-decoration: none; transition: all 0.2s; font-weight: 400; }
+.contact-card:hover { border-color: var(--border2); color: var(--accent); background: var(--glow); }
+footer { padding: 28px 6%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+footer p { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+  .about-wrap, .exp-grid { grid-template-columns: 1fr; }
+  .exp-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 24px; margin-bottom: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .exp-content { padding-left: 0; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .numbers-grid { grid-template-columns: repeat(2,1fr); }
+  .hero-stats { flex-wrap: wrap; gap: 28px; }
+  .skills-wrap { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <div class="nav-logo">Aryan <em>Sardana</em></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Work</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Product Manager · Gurugram, India</span>
+    </div>
+    <h1 class="hero-name">Aryan<br><span class="italic">Sardana</span></h1>
+    <div class="hero-title">Product · Strategy · Growth</div>
+    <p class="hero-desc">2+ years building at the intersection of product, engineering, and business. I turn ambiguous user problems into clear product decisions — shipping features that move metrics and delight users.</p>
+    <div class="hero-actions">
+      <a href="#experience" class="btn-gold">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">3<span>+</span></div><div class="stat-l">Companies</div></div>
+      <div class="stat"><div class="stat-n">2<span>+</span></div><div class="stat-l">Years Building</div></div>
+      <div class="stat"><div class="stat-n">10<span>+</span></div><div class="stat-l">Features Shipped</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">User Empathy</div></div>
+    </div>
+  </div>
+</section>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Product Strategy</span><span class="sep">✦</span><span>User Research</span><span class="sep">✦</span><span>Roadmapping</span><span class="sep">✦</span><span>SaaS Products</span><span class="sep">✦</span><span>CRM Automation</span><span class="sep">✦</span><span>Agile · Sprints</span><span class="sep">✦</span><span>Stakeholder Alignment</span><span class="sep">✦</span><span>Feature Prioritization</span><span class="sep">✦</span><span>Product Analytics</span><span class="sep">✦</span><span>Go-To-Market</span><span class="sep">✦</span><span>Product Strategy</span><span class="sep">✦</span><span>User Research</span><span class="sep">✦</span><span>Roadmapping</span><span class="sep">✦</span><span>SaaS Products</span><span class="sep">✦</span><span>CRM Automation</span><span class="sep">✦</span><span>Agile · Sprints</span><span class="sep">✦</span><span>Stakeholder Alignment</span><span class="sep">✦</span><span>Feature Prioritization</span><span class="sep">✦</span><span>Product Analytics</span><span class="sep">✦</span><span>Go-To-Market</span><span class="sep">✦</span>
+  </div>
+</div>
+<section id="about">
+  <div class="sec-label">Who I Am</div>
+  <div class="about-wrap">
+    <div class="about-left reveal">
+      <div class="sec-title">Product thinker.<br><em>Relentless</em> builder.</div>
+      <p>I'm a product professional who has operated across the full stack of product work — from <strong>writing BRDs and running sprint planning</strong> to shipping React components and designing CRM automation flows at scale.</p>
+      <p>My background spans <strong>cybersecurity (risk thinking), frontend engineering (build thinking), and product strategy (user thinking)</strong> — giving me a rare ability to bridge technical teams and business stakeholders with clarity and speed.</p>
+      <p>Currently at <strong>Lenskart</strong>, I own internal product workflows that directly impact how operations, sales, and tech teams execute at one of India's fastest-growing D2C companies.</p>
+      <div class="about-philosophy">
+        <div class="philosophy-label">My Product Philosophy</div>
+        <div class="philosophy-text">"The best product decisions are boring — they come from listening harder than anyone else in the room."</div>
+      </div>
+    </div>
+    <div class="skills-wrap reveal reveal-delay-1">
+      <div class="skill-box">
+        <div class="skill-box-title">Product Core</div>
+        <div class="tags"><span class="tag">PRDs</span><span class="tag">Roadmapping</span><span class="tag">Feature Prioritization</span><span class="tag">User Research</span><span class="tag">Product Analytics</span><span class="tag">GTM Planning</span></div>
+      </div>
+      <div class="skill-box">
+        <div class="skill-box-title">Data & Ops</div>
+        <div class="tags"><span class="tag">Excel</span><span class="tag">Dashboards</span><span class="tag">Process Mapping</span><span class="tag">CRM Workflows</span><span class="tag">Requirement Analysis</span></div>
+      </div>
+      <div class="skill-box">
+        <div class="skill-box-title">Technical</div>
+        <div class="tags"><span class="tag">React</span><span class="tag">REST APIs</span><span class="tag">Redux</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Axios</span></div>
+      </div>
+      <div class="skill-box">
+        <div class="skill-box-title">Collaboration</div>
+        <div class="tags"><span class="tag">Agile / Scrum</span><span class="tag">Sprint Planning</span><span class="tag">Bug Triaging</span><span class="tag">Stakeholder Mgmt</span><span class="tag">Product Launch</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="experience" class="exp-section">
+  <div class="sec-label">Career</div>
+  <div class="sec-title reveal">Where I've <em>shipped.</em></div>
+  <div class="exp-grid reveal">
+    <div class="exp-sidebar">
+      <div class="exp-nav-item active" onclick="showExp('lenskart',this)">
+        <div class="exp-nav-company">Lenskart</div>
+        <div class="exp-nav-role">Strategy Executive</div>
+      </div>
+      <div class="exp-nav-item" onclick="showExp('oodles',this)">
+        <div class="exp-nav-company">Oodles Technologies</div>
+        <div class="exp-nav-role">Associate Web Dev</div>
+      </div>
+      <div class="exp-nav-item" onclick="showExp('riskbrick',this)">
+        <div class="exp-nav-company">RiskBrick</div>
+        <div class="exp-nav-role">Security Analyst Intern</div>
+      </div>
+    </div>
+    <div class="exp-content">
+      <div class="exp-panel active" id="exp-lenskart">
+        <div class="exp-co">Lenskart · Gurugram</div>
+        <div class="exp-role-title">Strategy Executive<br>— Product & Operations</div>
+        <span class="exp-date">Jul 2025 – Present</span>
+        <ul class="exp-bullets">
+          <li>Own end-to-end design of CRM workflows — automation rules, data visibility pipelines, and operational logic — directly improving cross-team execution speed.</li>
+          <li>Partner with business, engineering, and ops teams to identify workflow bottlenecks; translate user pain into structured product improvements with clear success metrics.</li>
+          <li>Drive stakeholder alignment by documenting process flows and BRDs — reducing back-and-forth between business owners and engineering by creating single sources of truth.</li>
+          <li>Analyze process gaps and user pain points across internal tooling, proposing prioritized improvements that balance effort and business impact.</li>
+        </ul>
+        <div class="exp-chips"><span class="chip">CRM Design</span><span class="chip">BRDs</span><span class="chip">Process Automation</span><span class="chip">Stakeholder Alignment</span><span class="chip">D2C / E-commerce</span></div>
+      </div>
+      <div class="exp-panel" id="exp-oodles">
+        <div class="exp-co">Oodles Technologies · Gurugram</div>
+        <div class="exp-role-title">Associate Web Developer<br>— Product Team</div>
+        <span class="exp-date">Nov 2024 – Apr 2025</span>
+        <ul class="exp-bullets">
+          <li>Embedded within the product team — collaborated daily with PMs, designers, and backend engineers, owning front-end delivery for key user-facing features across React-based web products.</li>
+          <li>Translated product requirements and user stories into production-ready UI components with measurable focus on performance, usability, and edge case handling.</li>
+          <li>Integrated REST APIs across multiple features; owned critical user flows including data rendering pipelines and error state UX that directly affected user retention.</li>
+          <li>Active participant in sprint planning, backlog grooming, and bug triaging — consistently bridging the gap between product intent and engineering execution.</li>
+        </ul>
+        <div class="exp-chips"><span class="chip">React · Redux</span><span class="chip">Agile</span><span class="chip">Sprint Planning</span><span class="chip">User Flows</span><span class="chip">API Integration</span></div>
+      </div>
+      <div class="exp-panel" id="exp-riskbrick">
+        <div class="exp-co">RiskBrick Solutions Pvt Ltd</div>
+        <div class="exp-role-title">Cyber Security<br>Analyst Intern</div>
+        <span class="exp-date">Aug 2024 – Nov 2024</span>
+        <ul class="exp-bullets">
+          <li>Conducted structured vulnerability assessments and risk pattern analysis — developed the analytical rigor and prioritization thinking that now drives product decisions.</li>
+          <li>Authored detailed reports for both technical and C-suite stakeholders, building the cross-functional communication skills essential to PM work.</li>
+          <li>Contributed to security mitigation strategies — an early exposure to product trade-offs between speed, safety, and user impact.</li>
+        </ul>
+        <div class="exp-chips"><span class="chip">Risk Analysis</span><span class="chip">Documentation</span><span class="chip">Stakeholder Reporting</span><span class="chip">Critical Thinking</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="numbers-section">
+  <div class="numbers-grid">
+    <div class="number-item reveal"><div class="number-big">3+</div><div class="number-desc">Cross-functional teams led</div></div>
+    <div class="number-item reveal reveal-delay-1"><div class="number-big">10+</div><div class="number-desc">Features shipped end-to-end</div></div>
+    <div class="number-item reveal reveal-delay-2"><div class="number-big">2+</div><div class="number-desc">SaaS products owned</div></div>
+    <div class="number-item reveal reveal-delay-3"><div class="number-big">∞</div><div class="number-desc">Curiosity & user obsession</div></div>
+  </div>
+</div>
+<section id="projects">
+  <div class="sec-label">Work Samples</div>
+  <div class="sec-title reveal">Products I've <em>shaped.</em></div>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-icon">📅</div>
+      <div class="project-name">Virtual Event Planner</div>
+      <div class="project-type">SaaS Product · End-to-End</div>
+      <div class="project-desc">Designed and built a full SaaS event management platform — user auth, event creation, RSVP flows, and engagement dashboards. Led the entire product lifecycle from problem definition to launch.</div>
+      <div class="project-outcomes">
+        <div class="outcome-title">PM Lens</div>
+        <div class="outcome-item">→ Defined user personas & mapped full journey</div>
+        <div class="outcome-item">→ Scoped MVP: auth, creation, RSVP, analytics</div>
+        <div class="outcome-item">→ Designed for mobile-first, multi-tenant use</div>
+      </div>
+      <div class="tags"><span class="tag">React</span><span class="tag">SaaS</span><span class="tag">User Flows</span><span class="tag">Dashboards</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-icon">🛒</div>
+      <div class="project-name">E-Commerce UX Deep Dive</div>
+      <div class="project-type">UX Research · Conversion</div>
+      <div class="project-desc">Rebuilt Amazon's homepage from scratch as a systematic UX study — reverse-engineering information architecture, navigation hierarchies, and conversion-focused design patterns used at scale.</div>
+      <div class="project-outcomes">
+        <div class="outcome-title">PM Lens</div>
+        <div class="outcome-item">→ Analyzed discovery-to-purchase funnel design</div>
+        <div class="outcome-item">→ Mapped CTAs, hierarchy & attention anchors</div>
+        <div class="outcome-item">→ Extracted patterns applicable to product decisions</div>
+      </div>
+      <div class="tags"><span class="tag">UX Research</span><span class="tag">Conversion</span><span class="tag">IA</span></div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-icon">⚙️</div>
+      <div class="project-name">CRM Workflow Redesign</div>
+      <div class="project-type">Internal Product · Lenskart</div>
+      <div class="project-desc">Owned the analysis and redesign of internal CRM workflows at Lenskart — identified automation opportunities, eliminated manual steps, and shipped a new workflow architecture adopted by ops teams.</div>
+      <div class="project-outcomes">
+        <div class="outcome-title">PM Lens</div>
+        <div class="outcome-item">→ Ran stakeholder interviews to map pain points</div>
+        <div class="outcome-item">→ Designed automation rules & new data flows</div>
+        <div class="outcome-item">→ Wrote BRDs for engineering handoff</div>
+      </div>
+      <div class="tags"><span class="tag">CRM</span><span class="tag">Process Design</span><span class="tag">Automation</span><span class="tag">BRDs</span></div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="sec-label" style="justify-content:center">Contact</div>
+    <div class="contact-name reveal">Let's build<br>something <em>great.</em></div>
+    <p class="contact-sub reveal">I'm actively exploring Product Manager opportunities at ambitious companies. If you're building something meaningful and need a PM who obsesses over users — let's talk.</p>
+    <div class="contact-cards reveal">
+      <a class="contact-card" href="mailto:sardanaaryan40@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        sardanaaryan40@gmail.com
+      </a>
+      <a class="contact-card" href="tel:+918816091012">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.89 12 19.79 19.79 0 0 1 1.81 3.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6.72 6.72l1.21-1.21a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 88160 91012
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/aryan-sardana-6bb646229" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/aryan-sardana
+      </a>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>© 2025 Aryan Sardana</p>
+  <p>Product Manager · Gurugram, India</p>
+</footer>
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.exp-nav-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ ring.style.width='50px'; ring.style.height='50px'; ring.style.opacity='0.6'; });
+  el.addEventListener('mouseleave',()=>{ ring.style.width='32px'; ring.style.height='32px'; ring.style.opacity='1'; });
+});
+function showExp(id, el) {
+  document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.exp-nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('exp-'+id).classList.add('active');
+  el.classList.add('active');
+}
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
